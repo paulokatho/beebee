@@ -6,11 +6,13 @@ import javax.persistence.PersistenceContext;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
@@ -52,10 +54,21 @@ public class CervejasImpl implements CervejasQueries{
 			int primeiroRegistro = paginaAtual * totalRegistrosPorPagina;
 			
 			criteria.setFirstResult(primeiroRegistro);
-			criteria.setMaxResults(totalRegistrosPorPagina);
-			
+			criteria.setMaxResults(totalRegistrosPorPagina);			
 		//Fim do calculo de paginação
-				
+			
+		//Adicionando ordenação dos parametros na tela de busca - Sort
+			Sort sort = pageable.getSort(); //Sort tem que ser do pacote spring.data.domain
+			System.out.println(">>> Sort: " + sort);
+			if (sort != null) {
+				Sort.Order order = sort.iterator().next();//Order é do pacote do Spring.domain e o iterator pode colocar na url ordernação por vários campos (sku, nome, estilo...)
+				String property = order.getProperty();// property é o campo field lá da pagina de pesquisa... Ex: propriedade do campo SKU
+				//Abaixo estamos traduzinho o Order do hibernate para o Order do Criteria
+				criteria.addOrder(order.isAscending() ? Order.asc(property) : Order.desc(property));//Esse Oder é do pacote do hibernate.criterion
+			}
+			
+		//
+			
 		adicionarFiltro(filtro, criteria);
 		
 		/***
