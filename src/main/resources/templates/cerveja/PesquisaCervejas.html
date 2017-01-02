@@ -99,10 +99,26 @@
 					<tr>
 						<th class="table-cervejas-col-foto"></th>
 						<th class="table-cervejas-col-sku">
-							SKU
-							<span class="dropup"><span class="caret"></span></span>
+							<a th:href="${pagina.urlOrdenada('sku')}" th:remove="${pagina.vazia} ? tag"> 
+								<span>SKU</span>							
+								<!-- o "dropup" mostra a setinha pra cima. O th:remove remove essa tag toda e a setinha da
+									 página vai ficar pra baixo com o "caret" -->
+								<span class="dropup" th:remove="${pagina.descendente('sku')} ? tag" 
+										th:if="${pagina.ordenada('sku')}">
+									<span class="caret"></span>
+								</span>
+							</a>
 						</th>
-						<th class="table-cervejas-col-nome">Nome</th>
+						<th class="table-cervejas-col-nome">
+							<a th:href="${pagina.urlOrdenada('nome')}" th:remove="${pagina.vazia} ? tag">
+								<span>Nome</span><!-- Não vai aparecer o link de ordenação no "Nome" se o retorno da pesquisa for vazio ou nulo -->
+								<!-- A tag span abaixo só será renderezida se houver ordenação, senão ela nem aparece -->
+								<span class="dropup" th:remove="${pagina.descendente('nome')} ? tag"
+										th:if="${pagina.ordenada('nome')}">
+									<span class="caret"></span>
+								</span>
+							</a>
+						</th>
 						<th class="table-cervejas-col-estilo">Estilo</th>
 						<th class="table-cervejas-col-origem">Origem</th>
 						<th class="table-cervejas-col-valor">Valor</th>
