@@ -136,26 +136,10 @@
 			</table>
 		</div>
 		
-		<!-- Paginação com Bootstrap -->
-		<div class="col-sm-12  text-center" th:if="${not pagina.vazia}">
-			<nav>
-				<ul class="pagination pagination-sm" th:with="paginaAtual=${pagina.atual}"><!-- Dá pra usar somente "pagina.atual" que vem de PageWrapper, mas colocou dentro da varialvel paginaAtual só pra ver como funciona o th:with( que é possível fz das duas maneiras  -->
-					<li th:class="${pagina.primeira} ? disable">						
-						<a th:href="${pagina.urlParaPagina(paginaAtual - 1)}" th:remove="${pagina.primeira} ? tag"><span>&laquo;</span></a>
-					</li>
-					
-					<th:block th:each="p : ${#numbers.sequence(1, pagina.total)}" th:with="numeroPagina=${p - 1}">
-						<li th:class="${paginaAtual == numeroPagina} ? active">						
-							<a th:href="${pagina.urlParaPagina(numeroPagina)}|">[[${p}]]</a>
-						</li>
-					</th:block>
-					
-					<li th:class="${pagina.ultima} ? disable">						
-						<a th:href="${pagina.urlParaPagina(paginaAtual + 1)}" th:remove="${pagina.ultima} ? tag"><span>&raquo;</span></a>
-					</li>
-				</ul>
-			</nav>
-		</div>
+		<!-- Paginação com Bootstrap
+		<beebee:pagination page="${pagina}"/> -->
+		<th:block th:replace="fragments/Paginacao :: paginacao"></th:block>
+		
 	</div> <!-- fechando o <div class="container-fluid"> -->
 </section>
 </body>
