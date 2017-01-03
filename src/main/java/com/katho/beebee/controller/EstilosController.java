@@ -100,7 +100,7 @@ public class EstilosController {
 		//aqui estou retornando para o javascript o estilo, então posso pegar ele nos argumentos que são passados na tela
 	}
 	
-	@GetMapping()
+	@GetMapping
 	public ModelAndView pesquisar(EstiloFilter estiloFilter, BindingResult bindingResult
 			, @PageableDefault(size = 2)  Pageable pageable, HttpServletRequest httpServletRequest) {
 		

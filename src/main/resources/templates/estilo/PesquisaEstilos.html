@@ -45,13 +45,15 @@
 				<thead>
 					<tr>
 						<th class="table-estilos-col-codigo">Código</th>
-						<th class="table-estilos-col-nome">Nome</th>
+						<th class="table-estilos-col-nome">															
+							<beebee:order page="${pagina}" field="nome" text="Nome"/>
+						</th>
 						<th class="table-estilos-col-acoes"></th>
 					</tr>
 				</thead>
 				
 				<tbody>
-					<tr th:each="estilo : ${estilos}">
+					<tr th:each="estilo : ${pagina.conteudo}">
 						<td class="text-center" th:text="${estilo.codigo}">1</td>
 						<td th:text="${estilo.nome}">Pale Ale</td>
 						<td class="text-center">	

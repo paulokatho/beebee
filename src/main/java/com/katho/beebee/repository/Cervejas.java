@@ -22,8 +22,7 @@ import com.katho.beebee.repository.helper.cerveja.CervejasQueries;
  */
 @Repository
 public interface Cervejas extends JpaRepository<Cerveja, Long>, CervejasQueries {
-	//Cerveja é o Repositorio do tipo cerveja e Long é o tipo do 
-	//@id da classe cerveja
+	//Cerveja é o Repositorio do tipo cerveja e Long é o tipo do @id da classe cerveja
 
 	
 }

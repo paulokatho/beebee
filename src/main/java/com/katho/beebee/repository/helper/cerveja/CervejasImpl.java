@@ -51,7 +51,7 @@ public class CervejasImpl implements CervejasQueries{
 		//Começo do calculo de paginação para o Pageable
 			int paginaAtual = pageable.getPageNumber();
 			int totalRegistrosPorPagina = pageable.getPageSize();
-			int primeiroRegistro = paginaAtual * totalRegistrosPorPagina;
+			int primeiroRegistro = paginaAtual * totalRegistrosPorPagina; //é o primeiro registro de cada aba da paginação
 			
 			criteria.setFirstResult(primeiroRegistro);
 			criteria.setMaxResults(totalRegistrosPorPagina);			
@@ -80,7 +80,7 @@ public class CervejasImpl implements CervejasQueries{
 	
 	private Long total(CervejaFilter filtro) {
 		Criteria criteria = manager.unwrap(Session.class).createCriteria(Cerveja.class);
-		adicionarFiltro(filtro, criteria);//para funcionar o filtro e aparece o número correto de paginas dinamicamente na pesquisa
+		adicionarFiltro(filtro, criteria);//para funcionar o filtro e aparecer o número correto de paginas dinamicamente na pesquisa
 		criteria.setProjection(Projections.rowCount());//rowCount vai retornar a quantidade de registros que tem o Cerveja.class
 		return (Long) criteria.uniqueResult();
 	}
