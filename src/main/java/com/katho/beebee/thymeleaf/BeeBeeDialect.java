@@ -9,6 +9,7 @@ import org.thymeleaf.standard.StandardDialect;
 
 import com.katho.beebee.thymeleaf.processor.ClassForErrorAttributeTagProcessor;
 import com.katho.beebee.thymeleaf.processor.MessageElementTagProcessor;
+import com.katho.beebee.thymeleaf.processor.OrderElementTagProcessor;
 
 public class BeeBeeDialect extends AbstractProcessorDialect {
 
@@ -21,6 +22,7 @@ public class BeeBeeDialect extends AbstractProcessorDialect {
 		final Set<IProcessor> processadores = new HashSet<>();
 		processadores.add(new ClassForErrorAttributeTagProcessor(dialectPrefix));
 		processadores.add(new MessageElementTagProcessor(dialectPrefix));
+		processadores.add(new OrderElementTagProcessor(dialectPrefix));
 		return processadores;
 	}
 
