@@ -35,8 +35,8 @@ BeeBee.MaskMoney = (function () { // 1- Criamos esse nameEspace de BeeBee declar
  */
 
 BeeBee.MaskPhoneNumber = (function() {
-	function MaskPhoneNumber() {
 	
+	function MaskPhoneNumber() {
 		this.inputPhoneNumber = $(".js-phone-number");
 	}	
 	
@@ -53,7 +53,7 @@ BeeBee.MaskPhoneNumber = (function() {
 		
 		
 	}
-	return MaskPhoneNumber();
+	return MaskPhoneNumber;
 
 }());
 $(function() { // 5- Executando nosso objeto criado acima
