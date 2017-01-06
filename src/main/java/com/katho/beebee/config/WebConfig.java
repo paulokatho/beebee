@@ -26,6 +26,7 @@ import org.thymeleaf.spring4.view.ThymeleafViewResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
+import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
 import com.katho.beebee.controller.CervejasController;
 import com.katho.beebee.controller.converter.EstiloConverter;
 import com.katho.beebee.thymeleaf.BeeBeeDialect;
@@ -65,6 +66,7 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		
 		engine.addDialect(new LayoutDialect());		
 		engine.addDialect(new BeeBeeDialect());
+		engine.addDialect(new DataAttributeDialect());
 		return engine;
 	}
 
