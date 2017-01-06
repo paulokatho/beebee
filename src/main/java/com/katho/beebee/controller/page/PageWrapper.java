@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Sort.Order;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageWrapper<T> {
 
 	private Page<T>  page;
-	private UriComponentsBuilder uriBuilder;//
+	private UriComponentsBuilder uriBuilder;
 
 	public PageWrapper(Page<T> page, HttpServletRequest httpServletRequest ) {
 		this.page = page;
-		this.uriBuilder = ServletUriComponentsBuilder.fromRequest(httpServletRequest);
+		//this.uriBuilder = ServletUriComponentsBuilder.fromRequest(httpServletRequest);***DESTA MANEIRA NÃO FUNCIONA, POIS É UM ERRO DO SPRING ANTIGO, DA MANEIRA QUE ESTÁ AQUI ESTA CONCATENANDO A URL/URI NA TELA COM "+". E ISSO GERA ERRO SE FOR FZ PESQUISAR E TIVER UM CARACTER BRANCO ANTES DA LETRA NA PESQUISA POR NOME
+		String httpUrl = httpServletRequest.getRequestURL().append(
+				httpServletRequest.getQueryString() != null ? "?" + httpServletRequest.getQueryString() : "")
+				.toString().replaceAll("\\+", "%20");
+		this.uriBuilder = UriComponentsBuilder.fromHttpUrl(httpUrl);
 	}
 	
 	/***

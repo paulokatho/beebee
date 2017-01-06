@@ -10,6 +10,7 @@ import org.thymeleaf.standard.StandardDialect;
 import com.katho.beebee.thymeleaf.processor.ClassForErrorAttributeTagProcessor;
 import com.katho.beebee.thymeleaf.processor.MessageElementTagProcessor;
 import com.katho.beebee.thymeleaf.processor.OrderElementTagProcessor;
+import com.katho.beebee.thymeleaf.processor.PaginationElementTagProcessor;
 
 public class BeeBeeDialect extends AbstractProcessorDialect {
 
@@ -23,6 +24,7 @@ public class BeeBeeDialect extends AbstractProcessorDialect {
 		processadores.add(new ClassForErrorAttributeTagProcessor(dialectPrefix));
 		processadores.add(new MessageElementTagProcessor(dialectPrefix));
 		processadores.add(new OrderElementTagProcessor(dialectPrefix));
+		processadores.add(new PaginationElementTagProcessor(dialectPrefix));
 		return processadores;
 	}
 

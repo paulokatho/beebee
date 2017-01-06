@@ -5,7 +5,7 @@
 <!-- Esse fragmento será utilizado na pagina de PesquisaCervejas para os campos sku e nome para a ordenação.
 		Para essa página estamos recebendo 3 parametros (pagina, o texto SKU e a propriedade 'sku' -->
 
-<th:block th:fragment="order (pagina, propriedade, texto)"><!-- Será exibido na página somente a partir daqui até o fim deste bloco -->
+<th:block th:fragment="order (pagina, propriedade, texto)"><!-- Será exibido na página PesquisaCerveja somente a partir daqui até o fim deste bloco -->
 	
 	<a th:href="${pagina.urlOrdenada(propriedade)}" th:remove="${pagina.vazia} ? tag"> 
 		<span th:text="${texto}">	</span>							
