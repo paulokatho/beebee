@@ -83,7 +83,7 @@
 			<div class="row">
 				<div class="col-sm-4  form-group  bb-required">
 					<label for="cep">CEP</label>
-					<input id="cep" type="text" class="form-control"/>
+					<input id="cep" type="text" class="form-control  js-zip-code"/>
 				</div>	
 				<div class="col-sm-4  form-group  bb-required">
 					<label for="estado">Estado</label>
@@ -107,6 +107,7 @@
 	</div>
 </section>
 <!-- Bloco acrescentado na Aula 16.3 - Salvando estilo rapido com ajax / -->	
+
 <th:block layout:fragment="javascript-extra"><!-- javascript extra que quero carregar desta página -->
 	<script th:src="@{/javascripts/cliente.mascara-cpf-cnpj.js}"></script>
 </th:block>

@@ -54,8 +54,30 @@ BeeBee.MaskPhoneNumber = (function() {
 		
 	}
 	return MaskPhoneNumber;
-
 }());
+
+/*************************************************************************************/
+	
+/**********************************MASCARA DO CEP*************************************/
+
+BeeBee.MaskZipCode = (function() {
+	
+	function MaskZipCode() {
+		this.inputZipCode = $('.js-zip-code');
+	
+	}
+	
+	MaskZipCode.prototype.enable = function() {
+		
+		this.inputZipCode.mask('00.000-000');
+	}
+	
+	return MaskZipCode;
+}());
+	
+/*************************************************************************************/
+
+
 $(function() { // 5- Executando nosso objeto criado acima
 	
 	//essa variavel poderia ser qq nome, esta com esse nome para facilitar e ficar mais legivel o código
@@ -64,6 +86,9 @@ $(function() { // 5- Executando nosso objeto criado acima
 	
 	var maskPhoneNumber = new BeeBee.MaskPhoneNumber();
 	maskPhoneNumber.enable();
+	
+	var maskZipCode = new BeeBee.MaskZipCode();
+	maskZipCode.enable();
 	
 });
 	
