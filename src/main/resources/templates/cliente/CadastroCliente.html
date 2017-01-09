@@ -84,13 +84,14 @@
 				<div class="col-sm-4  form-group  bb-required">
 					<label for="cep">CEP</label>
 					<input id="cep" type="text" class="form-control  js-zip-code"/>
-				</div>	
-				<div class="col-sm-4  form-group  bb-required">
+				</div>
+			<!-- Combobox Estado -->	
+				<div class="col-sm-4  form-group">
 					<label for="estado">Estado</label>
-						<select id="estado" class="form-control">
-							<option value="">Selecione o estado</option>
-							<option value="1">São Paulo</option>
-						</select>														
+							<select id="estado" class="form-control">
+								<option value="">Selecione o estado</option>
+								<option th:each="estado : ${estados}" value="${estado.codigo}" th:text="${estado.nome}">São Paulo</option>
+							</select>							
 				</div>
 				<div class="col-sm-4  form-group  bb-required">
 					<label for="cidade">Cidade</label>

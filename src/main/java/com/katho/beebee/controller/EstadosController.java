@@ -2,19 +2,24 @@ package com.katho.beebee.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/estados")
 public class EstadosController {
 	
-	@RequestMapping("novo")
-	public ModelAndView novo() {
-		ModelAndView mv = new ModelAndView("/estado/CadastroEstado");
+	/*
+	@Autowired
+	private Estados estados;
+	
+	@RequestMapping("/novo")
+	public ModelAndView novo(Estado estado) {
+		ModelAndView mv = new ModelAndView("estado/CadastroCliente");
 		
 		//TODO: Carregar todos os estados.... findAll();
+		mv.addObject("estados", estados.findAll());
 		
 		return mv;
 	}
+	*/
 
 }
