@@ -66,7 +66,14 @@ BeeBee.ComboCidade = (function() {
 		this.combo.removeAttr('disabled');//habilita o combo de cidade qdo escolhe um estado
 	}
 	
+	function reset() {
+		this.combo.html('<option value="">Selecione a cidade</option>');
+		this.combo.val('');
+		this.combo.attr('disabled', 'disabled');
+	}
+	
 	function iniciarRequisicao() {//para aparecer o icone de carregando
+		reset.call(this);//deixa o combo desabilitado milissegundos quando uma cidade é desabilitada
 		this.imgLoading.show();
 	}
 	

@@ -2,7 +2,11 @@ package com.katho.beebee.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,10 +20,13 @@ public class Cliente implements Serializable{
 
 	private Long codigo;
 	private String nome;
+	private TipoPessoa tipoPessoa;
 	private String cpfOuCnpj;
 	private String telefone;
 	private String email;
-
+	@Embedded
+	private Endereco endereco;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getCodigo() {
@@ -38,6 +45,17 @@ public class Cliente implements Serializable{
 		this.nome = nome;
 	}
 
+	@Enumerated(EnumType.STRING)
+	@Column(name = "tipo_pessoa")
+	public TipoPessoa getTipoPessoa() {
+		return tipoPessoa;
+	}
+
+	public void setTipoPessoa(TipoPessoa tipoPessoa) {
+		this.tipoPessoa = tipoPessoa;
+	}
+
+	@Column(name = "cpf_cnpj")
 	public String getCpfOuCnpj() {
 		return cpfOuCnpj;
 	}
@@ -61,7 +79,16 @@ public class Cliente implements Serializable{
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
+	@Embedded
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

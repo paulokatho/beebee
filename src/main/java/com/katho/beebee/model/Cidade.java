@@ -3,12 +3,15 @@ package com.katho.beebee.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="cidade")
@@ -38,8 +41,15 @@ public class Cidade implements Serializable{
 		this.nome = nome;
 	}
 
-	@ManyToOne
+	/***
+	 * 
+	 * Sempre tem que ter o "Lazy e JsonIgnore".
+	 * 	Se tirar o Lazy, toda requisição ele pesquisa/carrega o estado novamente e nesse momento não queremos.
+	 *  JsonIgnore, se tirar ele o estado vai aparecer nos parametros da requisicao, no console do browser.
+	 */
+	@ManyToOne(fetch = FetchType.LAZY)//não busca o estado quando a pesquisa do CidadesController "findByEstadoCodigo()" é feita
 	@JoinColumn(name = "codigo_estado")
+	@JsonIgnore//Não carrega o estado no request/response. No console não aparece o estado nos parametros
 	public Estado getEstado() {
 		return estado;
 	}
