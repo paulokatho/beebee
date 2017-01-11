@@ -11,12 +11,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CNPJ;
+import org.hibernate.validator.constraints.br.CPF;
+import org.hibernate.validator.group.GroupSequenceProvider;
+
+import com.katho.beebee.model.validation.ClienteGroupSequenceProvider;
+import com.katho.beebee.model.validation.CnpjGroup;
+import com.katho.beebee.model.validation.CpfGroup;
 
 @Entity
 @Table(name = "cliente")
+@GroupSequenceProvider(ClienteGroupSequenceProvider.class)
 public class Cliente implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -48,7 +57,8 @@ public class Cliente implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	
+	@NotNull(message = "Tipo pessoa é obrigatório")
 	@Enumerated(EnumType.STRING)
 	@Column(name = "tipo_pessoa")
 	public TipoPessoa getTipoPessoa() {
@@ -59,6 +69,9 @@ public class Cliente implements Serializable{
 		this.tipoPessoa = tipoPessoa;
 	}
 
+	@NotBlank(message = "CPF/CNPJ é obrigatório")
+	@CNPJ(groups = CpfGroup.class)
+	@CPF(groups = CnpjGroup.class)
 	@Column(name = "cpf_cnpj")
 	public String getCpfOuCnpj() {
 		return cpfOuCnpj;
@@ -76,7 +89,7 @@ public class Cliente implements Serializable{
 		this.telefone = telefone;
 	}
 	
-	@Email(message = "e-mail inválido")
+	@Email(message = "E-mail inválido")
 	public String getEmail() {
 		return email;
 	}

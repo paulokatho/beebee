@@ -59,7 +59,7 @@ BeeBee.ComboCidade = (function() {
 	function onBuscarCidadesFinalizado(cidades) {
 		var options = [];
 		cidades.forEach(function(cidade) {
-			options.push('<option value"' + cidade.codigo + '">' + cidade.nome + '</option>')//está acrescentando o option do combo de cidades.
+			options.push('<option value ="' + cidade.codigo + '">' + cidade.nome + '</option>')//está acrescentando o option do combo de cidades.
 		});
 		
 		this.combo.html(options.join(''));//o join junta todo o código do <option value... descrito acima no push()>
