@@ -14,6 +14,7 @@ import com.katho.beebee.model.Cliente;
 import com.katho.beebee.model.TipoPessoa;
 import com.katho.beebee.repository.Estados;
 import com.katho.beebee.service.CadastroClientesService;
+import com.katho.beebee.service.exception.CpfCnpjClienteJaCadastradoException;
 
 @Controller
 @RequestMapping("/clientes")
@@ -41,7 +42,16 @@ public class ClientesController {
 				return novo(cliente);
 		}
 		
-		cadastroClienteService.salvar(cliente);
+		/***
+		 * Nesse momento vamos tentar salvar, mas se houver um cpf/cnpj já cadastrado vamos rejeitar a requisição e retornar uma mensagem
+		 */
+		try {
+			cadastroClienteService.salvar(cliente);
+		}catch (CpfCnpjClienteJaCadastradoException e){
+			result.rejectValue("cpfOuCnpj", e.getMessage(), e.getMessage());
+			return novo(cliente); //tem que rejeitar e retornar para a tela principal para não cair na instrução abaixo.
+		}
+		
 		attributes.addFlashAttribute("mensagem", "Cliente salvo com sucesso!");
 		return new ModelAndView("redirect:/clientes/novo");
 	}
