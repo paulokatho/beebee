@@ -12,6 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table(name = "cliente")
 public class Cliente implements Serializable{
@@ -37,6 +40,7 @@ public class Cliente implements Serializable{
 		this.codigo = codigo;
 	}
 
+	@NotBlank(message = "Nome é obrigatório")
 	public String getNome() {
 		return nome;
 	}
@@ -71,7 +75,8 @@ public class Cliente implements Serializable{
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-
+	
+	@Email(message = "e-mail inválido")
 	public String getEmail() {
 		return email;
 	}
@@ -80,7 +85,6 @@ public class Cliente implements Serializable{
 		this.email = email;
 	}
 
-	@Embedded
 	public Endereco getEndereco() {
 		return endereco;
 	}

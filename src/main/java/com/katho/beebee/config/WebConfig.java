@@ -28,6 +28,7 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 
 import com.github.mxab.thymeleaf.extras.dataattribute.dialect.DataAttributeDialect;
 import com.katho.beebee.controller.CervejasController;
+import com.katho.beebee.controller.converter.CidadeConverter;
 import com.katho.beebee.controller.converter.EstiloConverter;
 import com.katho.beebee.thymeleaf.BeeBeeDialect;
 
@@ -92,7 +93,8 @@ public class WebConfig extends WebMvcConfigurerAdapter implements ApplicationCon
 		
 		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService();
 		//registrando o Converter
-		conversionService.addConverter(new EstiloConverter());
+		conversionService.addConverter(new EstiloConverter());	
+		conversionService.addConverter(new CidadeConverter());
 		
 		//Convertendo números bigDecimal e Integer, forçando para padrão pt-BR, por enquanto, antes da I18
 		

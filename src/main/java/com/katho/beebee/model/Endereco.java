@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 /***
  * 
@@ -24,7 +25,8 @@ public class Endereco implements Serializable{
 	private String numero;
 	private String complemento;
 	private String cep;
-	private String cidade;
+	private Cidade cidade;
+	private Estado estado;
 
 	public String getLogradouro() {
 		return logradouro;
@@ -60,12 +62,21 @@ public class Endereco implements Serializable{
 
 	@ManyToOne
 	@JoinColumn(name = "codigo_cidade")
-	public String getCidade() {
+	public Cidade getCidade() {
 		return cidade;
 	}
 
-	public void setCidade(String cidade) {
+	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
+	}
+
+	@Transient
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
 	}
 
 }
