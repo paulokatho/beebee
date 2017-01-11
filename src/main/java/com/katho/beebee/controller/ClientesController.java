@@ -8,10 +8,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.katho.beebee.model.Cliente;
 import com.katho.beebee.model.TipoPessoa;
 import com.katho.beebee.repository.Estados;
+import com.katho.beebee.service.CadastroClientesService;
 
 @Controller
 @RequestMapping("/clientes")
@@ -19,6 +21,9 @@ public class ClientesController {
 	
 	@Autowired
 	private Estados estados;
+	
+	@Autowired
+	private CadastroClientesService cadastroClienteService;
 	
 	@RequestMapping("/novo")
 	public ModelAndView novo(Cliente cliente) {
@@ -31,11 +36,13 @@ public class ClientesController {
 	}
 	
 	@PostMapping("/novo")
-	public ModelAndView salvar(@Valid Cliente cliente, BindingResult result) {
+	public ModelAndView salvar(@Valid Cliente cliente, BindingResult result, RedirectAttributes attributes) {
 		if(result.hasErrors()) {
 				return novo(cliente);
 		}
 		
+		cadastroClienteService.salvar(cliente);
+		attributes.addFlashAttribute("mensagem", "Cliente salvo com sucesso!");
 		return new ModelAndView("redirect:/clientes/novo");
 	}
 }

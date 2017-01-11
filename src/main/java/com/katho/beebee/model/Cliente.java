@@ -10,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -20,13 +22,13 @@ import org.hibernate.validator.constraints.br.CPF;
 import org.hibernate.validator.group.GroupSequenceProvider;
 
 import com.katho.beebee.model.validation.ClienteGroupSequenceProvider;
-import com.katho.beebee.model.validation.CnpjGroup;
-import com.katho.beebee.model.validation.CpfGroup;
+import com.katho.beebee.model.validation.group.CnpjGroup;
+import com.katho.beebee.model.validation.group.CpfGroup;
 
 @Entity
 @Table(name = "cliente")
 @GroupSequenceProvider(ClienteGroupSequenceProvider.class)
-public class Cliente implements Serializable{
+public class Cliente implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -38,6 +40,11 @@ public class Cliente implements Serializable{
 	private String email;
 	@Embedded
 	private Endereco endereco;
+	
+	@PrePersist @PreUpdate // Aula 16.10 - ~7:00 min - Esses são os métodos de Call Back do JPA.
+	private void prePersistPreUpdate() {
+		this.cpfOuCnpj = this.cpfOuCnpj.replaceAll("\\.|-|/", ""); //retira todos os .,- e / - Utilizando essa expressão regular.
+	}
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,8 +77,8 @@ public class Cliente implements Serializable{
 	}
 
 	@NotBlank(message = "CPF/CNPJ é obrigatório")
-	@CNPJ(groups = CpfGroup.class)
-	@CPF(groups = CnpjGroup.class)
+	@CNPJ(groups = CnpjGroup.class)
+	@CPF(groups = CpfGroup.class)
 	@Column(name = "cpf_cnpj")
 	public String getCpfOuCnpj() {
 		return cpfOuCnpj;

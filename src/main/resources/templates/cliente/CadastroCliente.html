@@ -38,8 +38,8 @@
 			</div>
 			
 			<div class="row">
-				<div class="col-lg-3  col-sm-6  form-group  bb-required" beebee:classforerror="tipoPessoa">
-					<label for="tipoPessoa" class="control-label">Tipo pessoa</label>
+				<div class="form-group  col-sm-4  bb-required" beebee:classforerror="tipoPessoa">
+					<label class="control-label">Tipo pessoa</label>
 					<div>
 						<th:block th:each="tipoPessoa : ${tiposPessoa}">
 							<div class="radio  radio-inline">
@@ -52,7 +52,7 @@
 						</th:block>
 					</div>
 				</div>
-				<div class="col-sm-8  form-group  bb-required" beebee:classforerror="cpfOuCnpj">
+				<div class="form-group  col-sm-8  bb-required" beebee:classforerror="cpfOuCnpj">
 					<label for="cpfOuCnpj" class="control-label">CPF/CNPJ</label>
 					<input id="cpfOuCnpj" type="text" class="form-control" th:field="*{cpfOuCnpj}" disabled/>
 				</div>				
@@ -92,14 +92,15 @@
 			<!-- Combobox Estado -->	
 				<div class="col-sm-4  form-group">
 					<label for="estado">Estado</label>
-							<select id="estado" class="form-control">
+							<select id="estado" class="form-control" th:field="*{endereco.estado}">
 								<option value="">Selecione o estado</option>
 								<option th:each="estado : ${estados}" th:value="${estado.codigo}" th:text="${estado.nome}">São Paulo</option>
 							</select>							
 				</div>
-				<div class="col-sm-4  form-group  bb-required">
+				<div class="form-group  col-sm-4  bb-required">
 					<label for="cidade">Cidade</label>
 					<div class="bb-field-action"><!-- Esse será um field que terá uma ação -->
+						<input type="hidden" id="inputHiddenCidadeSelecionada" th:value="*{endereco.cidade} != null ? *{endereco.cidade.codigo}"/>
 						<select id="cidade" class="form-control" data:url="@{/cidades}" disabled th:field="*{endereco.cidade}">
 							<!-- O option está no cliente.combo-cidade-estado.js -->	
 						</select>

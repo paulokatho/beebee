@@ -1,6 +1,6 @@
-var Brewer = Brewer || {};
+var BeeBee = BeeBee || {};
 
-Brewer.MascaraCpfCnpj = (function() {
+BeeBee.MascaraCpfCnpj = (function() {
 	
 	function MascaraCpfCnpj() {
 		this.radioTipoPessoa = $('.js-radio-tipo-pessoa');
@@ -33,6 +33,6 @@ Brewer.MascaraCpfCnpj = (function() {
 }());
 
 $(function() {
-	var mascaraCpfCnpj = new Brewer.MascaraCpfCnpj();
+	var mascaraCpfCnpj = new BeeBee.MascaraCpfCnpj();
 	mascaraCpfCnpj.iniciar();
 });

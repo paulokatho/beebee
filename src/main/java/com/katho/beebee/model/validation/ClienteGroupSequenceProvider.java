@@ -9,7 +9,7 @@ import com.katho.beebee.model.Cliente;
 
 
 /***
- * 
+ * 		
  * @author Katho
  *
  *	Classe para validação de cpf e cnpj no momento que passam pelo bean validation, para poder ficar vermelho na tela e saber qual é o cpf e qual é o cnpj

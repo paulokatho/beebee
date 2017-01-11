@@ -1,7 +1,7 @@
 package com.katho.beebee.model;
 
-import com.katho.beebee.model.validation.CnpjGroup;
-import com.katho.beebee.model.validation.CpfGroup;
+import com.katho.beebee.model.validation.group.CnpjGroup;
+import com.katho.beebee.model.validation.group.CpfGroup;
 
 /***
  * 
