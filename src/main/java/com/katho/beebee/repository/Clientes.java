@@ -21,7 +21,7 @@ public interface Clientes extends JpaRepository<Cliente, Long>{
 	 *  Só funciona a partir do java 8.
 	 */
 
-	public Optional<Clientes> fingByCpfOuCnpj(String cpfOuCnpj);
+	public Optional<Cliente> fingByCpfOuCnpj(String cpfOuCnpj);
 
 	
 }

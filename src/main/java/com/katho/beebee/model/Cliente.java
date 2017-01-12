@@ -43,7 +43,7 @@ public class Cliente implements Serializable {
 	
 	@PrePersist @PreUpdate // Aula 16.10 - ~7:00 min - Esses são os métodos de Call Back do JPA.
 	private void prePersistPreUpdate() {
-		this.cpfOuCnpj = this.cpfOuCnpj.replaceAll("\\.|-|/", ""); //retira todos os .,- e / - Utilizando essa expressão regular.
+		this.cpfOuCnpj = TipoPessoa.removeFormatacao(this.cpfOuCnpj); //Antes de persistir no banco é retirado todos os .,- e / - Utilizando essa expressão regular.
 	}
 	
 	@Id
@@ -113,6 +113,12 @@ public class Cliente implements Serializable {
 		this.endereco = endereco;
 	}
 
+	/*Para remover a mascara do cpf/cnpj quando for verificar se já existe o mesmo cadastrado no banco de dados antes de salvar. 
+	  Também está implementado na classe TipoPessoa	*/
+	public String getCpfOuCnpjSemFormatacao() {
+		return TipoPessoa.removeFormatacao(this.cpfOuCnpj); // Aula 16.11
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;

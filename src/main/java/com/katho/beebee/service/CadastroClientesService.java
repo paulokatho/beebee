@@ -10,6 +10,8 @@ import com.katho.beebee.model.Cliente;
 import com.katho.beebee.repository.Clientes;
 import com.katho.beebee.service.exception.CpfCnpjClienteJaCadastradoException;
 
+// Aula 16.11
+
 @Service
 public class CadastroClientesService {
 
@@ -18,7 +20,7 @@ public class CadastroClientesService {
 	
 	@Transactional
 	public void salvar(Cliente cliente) {
-		Optional<Clientes> clienteExistente = clientes.fingByCpfOuCnpj(cliente.getCpfOuCnpj());
+		Optional<Cliente> clienteExistente = clientes.fingByCpfOuCnpj(cliente.getCpfOuCnpjSemFormatacao());
 		if (clienteExistente.isPresent()) {
 			throw new CpfCnpjClienteJaCadastradoException("CPF/CNPJ já cadastrado");
 		}
