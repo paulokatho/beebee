@@ -13,42 +13,38 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
-		<!-- A partir da versão 3.1 é possível fazer o projeto sem o webXml e acrescentar 
-			quando necessário -->
 		<failOnMissingWebXml>false</failOnMissingWebXml>
 
-		<!-- Versão do java é necessário dar MavenUpdate no projeto para atualizar 
-			a versão no projeto -->
 		<java.version>1.8</java.version>
 		<maven-compiler-pluging.version>3.2</maven-compiler-pluging.version>
 		<flyway-maven-plugin.version>4.0.2</flyway-maven-plugin.version>
 		<mysql-connector-java.version>5.1.39</mysql-connector-java.version>
 
-		<!-- Propriedade da versão do spring-framework -->
+		<!-- Spring MVC -->
 		<spring-framework.version>4.3.0.RELEASE</spring-framework.version>
 
 		<!-- Servlet API -->
 		<servlet.version>3.1.0</servlet.version>
-
+		
 		<!-- Thymeleaf -->
-		<thymeleaf.version>3.0.1.RELEASE</thymeleaf.version>
-
+		<thymeleaf.version>3.0.0.RELEASE</thymeleaf.version>
+		
 		<!-- Bean Validation / Hibernate Validator -->
 		<hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
-
+		
 		<!-- Thymeleaf - Layout Dialect -->
-		<thymeleaf-layout-dialect.version>2.0.1</thymeleaf-layout-dialect.version>
-
+		<thymeleaf-layout-dialect.version>2.0.0</thymeleaf-layout-dialect.version>
+		
 		<!-- Logging -->
 		<log4j.version>2.6</log4j.version>
 		<jcl-over-slf4j.version>1.7.21</jcl-over-slf4j.version>
-
+		
 		<!-- JPA / Hibernate -->
 		<hibernate.version>5.1.0.Final</hibernate.version>
-
+		
 		<!-- Spring Data JPA -->
 		<spring-data-jpa.version>1.10.2.RELEASE</spring-data-jpa.version>
-
+		
 		<!-- Jackson - JSON -->
 		<jackson-core.version>2.7.5</jackson-core.version>
 		
@@ -58,7 +54,6 @@
 		
 		<!-- Thymeleaf extras data attribute -->
 		<thymeleaf-extras-data-attribute.version>2.0.1</thymeleaf-extras-data-attribute.version>
-
 	</properties>
 
 	<build>
@@ -71,7 +66,7 @@
 					<target>${java.version}</target>
 				</configuration>
 			</plugin>
-
+			
 			<plugin>
 				<groupId>org.flywaydb</groupId>
 				<artifactId>flyway-maven-plugin</artifactId>
@@ -80,11 +75,9 @@
 					<driver>com.mysql.jdbc.Driver</driver>
 				</configuration>
 			</plugin>
-
 		</plugins>
 	</build>
 
-	<!-- Para resolver possíveis problemas incompatibilidade de versão, pode-se usar o conceito de uma "lista de materiais" (BOM - Bill Of Materials) dependência.  -->
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
@@ -110,7 +103,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
+		
 		<!-- Servlet API -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -133,23 +126,22 @@
 			<version>${thymeleaf.version}</version>
 			<scope>compile</scope>
 		</dependency>
-
+		
 		<!-- Bean Validation / Hibernate Validator -->
+  		<dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate-validator.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        
+        <!-- Thymeleaf - Layout Dialect -->
 		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-			<version>${hibernate-validator.version}</version>
-			<scope>compile</scope>
+    		<groupId>nz.net.ultraq.thymeleaf</groupId>
+    		<artifactId>thymeleaf-layout-dialect</artifactId>
+    		<version>${thymeleaf-layout-dialect.version}</version>
 		</dependency>
-
-		<!-- Thymeleaf - Layout Dialect -->
-		<dependency>
-			<groupId>nz.net.ultraq.thymeleaf</groupId>
-			<artifactId>thymeleaf-layout-dialect</artifactId>
-			<version>${thymeleaf-layout-dialect.version}</version>
-			<scope>compile</scope>
-		</dependency>
-
+		
 		<!-- Logging -->
 		<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -171,8 +163,7 @@
 			<artifactId>jcl-over-slf4j</artifactId>
 			<version>${jcl-over-slf4j.version}</version>
 		</dependency>
-
-
+		
 		<!-- JPA / Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -182,13 +173,13 @@
 		</dependency>
 
 		<!-- Hibernate - Java 8 support -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-java8</artifactId>
-			<version>${hibernate.version}</version>
-			<scope>compile</scope>
+        <dependency>
+    		<groupId>org.hibernate</groupId>
+    		<artifactId>hibernate-java8</artifactId>
+    		<version>${hibernate.version}</version>
+    		<scope>compile</scope>
 		</dependency>
-
+		
 		<!-- MySQL Driver -->
 		<dependency>
 			<groupId>mysql</groupId>
@@ -196,12 +187,13 @@
 			<version>${mysql-connector-java.version}</version>
 			<scope>provided</scope>
 		</dependency>
-
+		
 		<!-- Spring Data JPA -->
 		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<version>${spring-data-jpa.version}</version>
+		    <groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-jpa</artifactId>
+		    <version>${spring-data-jpa.version}</version>
+		    <scope>compile</scope>
 		</dependency>
 		
 		<!-- Jackson - JSON -->
@@ -220,15 +212,14 @@
 			<scope>compile</scope>
 		</dependency>
 		
-		<!-- Thymeleaf extras data attribute : Serve para criar os atributos e deixar o codigo mais limpo(tem na pagina de cadastro de cliente)
-			 	O código foi tirado de https://github.com/mxab/thymeleaf-extras-data-attribute -->
+		<!-- Thymeleaf extras data attribute -->
 		<dependency>
     		<groupId>com.github.mxab.thymeleaf.extras</groupId>
-	    	<artifactId>thymeleaf-extras-data-attribute</artifactId>
-	    	<version>${thymeleaf-extras-data-attribute.version}</version>
-	    	<scope>compile</scope>
+    		<artifactId>thymeleaf-extras-data-attribute</artifactId>
+    		<version>${thymeleaf-extras-data-attribute.version}</version>
+    		<scope>compile</scope>
 		</dependency>
-
+		
 	</dependencies>
-
+	
 </project>

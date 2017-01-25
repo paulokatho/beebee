@@ -2,14 +2,13 @@
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/LayoutPadrao}"
-	xmlns:beebee="http://beebee.katho.com">
+	layout:decorate="layout/LayoutPadrao"
+	xmlns:brewer="http://brewer.algaworks.com">
 	
 <head>
 	<title>Cadastro de cerveja</title>
 	
 	<link rel="stylesheet" th:href="@{/stylesheets/vendors/upload.min.css}"/>
-	
 </head>
 
 <body>
@@ -22,80 +21,79 @@
 					<h1>Cadastro de cerveja</h1>
 				</div>
 			
-			<!-- Botão para voltar para a página de cadastro de cerveja -->
 				<div class="col-sm-2">
 					<div class="aw-page-header-controls">
 						<a class="btn  btn-default" th:href="@{/cervejas}">
 							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Pesquisa</span>
 						</a>
-					</div>				
+					</div>
 				</div>
 			</div>
-		</div>		
+		</div>
 	</div>
 
 	<div class="container-fluid">
 
 		<form method="POST" th:object="${cerveja}" class="form-vertical  js-form-loading">
-			
-			<beebee:message/>
+			<brewer:message/>
 	
 			<div class="row">
-				<div class="col-sm-2  form-group  bb-required" beebee:classforerror="sku">
+				<div class="col-sm-2  form-group  bw-required" brewer:classforerror="sku">
 					<label for="sku" class="control-label">SKU</label>
 					<input id="sku" type="text" class="form-control" th:field="*{sku}"/>
 				</div>
 				
-				<div class="col-sm-10  form-group  bb-required" beebee:classforerror="nome">
+				<div class="col-sm-10  form-group bw-required" brewer:classforerror="nome">
 					<label for="nome" class="control-label">Nome</label>
 					<input id="nome" type="text" class="form-control" th:field="*{nome}"/>
 				</div>
 			</div>
 
-			<div class="form-group  bb-required" beebee:classforerror="descricao">
+			<div class="form-group  bw-required" brewer:classforerror="descricao">
 				<label for="descricao" class="control-label">Descrição</label>
 				<textarea id="descricao" rows="3" class="form-control" th:field="*{descricao}"></textarea>
 			</div>
 
 			<div class="row">
-				<div class="col-sm-3  form-group  bb-required" th:classappend="${#fields.hasErrors('estilo')} ? has-error">
+				<div class="col-sm-3  form-group  bw-required" brewer:classforerror="estilo">
 					<label for="estilo" class="control-label">Estilo</label>
-					<div class="bb-field-action">
+					<div class="bw-field-action">
 						<select id="estilo" class="form-control" th:field="*{estilo}">
 							<option value="">Selecione o estilo</option>
 							<option th:each="estilo : ${estilos}" th:value="${estilo.codigo}" th:text="${estilo.nome}">Pale lager</option>
 						</select>
-						<div class="bb-field-action__icon">
+						
+						<div class="bw-field-action__icon">
 							<a href="#" data-toggle="modal" data-target="#modalCadastroRapidoEstilo">
-								<i class="glyphicon glyphicon-plus-sign  bb-glyphicon-large"></i>
+								<i class="glyphicon  glyphicon-plus-sign  bw-glyphicon-large"></i>
 							</a>
-						</div>						
+						</div>
 					</div>
 				</div>
 				
-				<div class="col-sm-3  form-group  bb-required" th:classappend="${#fields.hasErrors('sabor')} ? has-error">
+				<div class="col-sm-3  form-group  bw-required" brewer:classforerror="sabor">
 					<label for="sabor" class="control-label">Sabor</label>
 					<select id="sabor" class="form-control" th:field="*{sabor}">
 						<option value="">Selecione o sabor</option>
-						<option th:each="sabor : ${sabores}" th:value="${sabor}" th:text="${sabor.descricao}"></option>
+						<option th:each="sabor : ${sabores}" th:value="${sabor}" th:text="${sabor.descricao}">Adocicada</option>
 					</select>
 				</div>
 				
-				<div class="col-sm-3  form-group  bb-required" th:classappend="${#fields.hasErrors('teorAlcoolico')} ? has-error">
+				<div class="col-sm-3  form-group  bw-required" brewer:classforerror="teorAlcoolico">
 					<label for="teorAlcoolico" class="control-label">Teor alcoólico</label>
 					<div class="input-group">
-						<input id="teorAlcoolico" type="text" class="form-control js-decimal" th:field="*{teorAlcoolico}"/>
+						<input id="teorAlcoolico" type="text" class="form-control  js-decimal" th:field="*{teorAlcoolico}"/>
 						<div class="input-group-addon">%</div>
 					</div>
 				</div>
 				
-				<div class="col-lg-3  col-sm-6  form-group  bb-required" th:classappend="${#fields.hasErrors('origem')} ? has-error">
+				<div class="col-lg-3  col-sm-6  form-group  bw-required" brewer:classforerror="origem">
 					<label for="origem" class="control-label">Origem</label>
 					<div>
 						<th:block th:each="origem : ${origens}">
 							<div class="radio  radio-inline">
 								<input th:id="|id_${origem}|" type="radio" th:value="${origem}" th:field="*{origem}"> 
-								<label th:for="|id_${origem}|" th:text="${origem.descricao}"></label>
+								<label th:for="|id_${origem}|" th:text="${origem.descricao}">Nacional</label>
 							</div>
 						</th:block>
 					</div>
@@ -103,43 +101,43 @@
 			</div>
 			
 			<div class="row">
-				<div class="col-sm-3  form-group  bb-required" th:classappend="${#fields.hasErrors('valor')} ? has-error">
+				<div class="col-sm-3  form-group  bw-required" brewer:classforerror="valor">
 					<label for="valor" class="control-label">Valor</label>
 					<div class="input-group">
 						<div class="input-group-addon">R$</div>
-						<input id="valor" type="text" class="form-control js-decimal" th:field="*{valor}"/>
+						<input id="valor" type="text" class="form-control  js-decimal" th:field="*{valor}"/>
 					</div>
 				</div>
 				
-				<div class="col-sm-3  form-group  bb-required" th:classappend="${#fields.hasErrors('comissao')} ? has-error">
+				<div class="col-sm-3  form-group  bw-required" brewer:classforerror="comissao">
 					<label for="comissao" class="control-label">Comissão</label>
 					<div class="input-group">
-						<input id="comissao" type="text" class="form-control js-decimal" th:field="*{comissao}"/>
+						<input id="comissao" type="text" class="form-control  js-decimal" th:field="*{comissao}"/>
 						<div class="input-group-addon">%</div>
 					</div>
 				</div>
 				
-				<div class="col-sm-3  form-group  bb-required" th:classappend="${#fields.hasErrors('quantidadeEstoque')} ? has-error">
+				<div class="col-sm-3  form-group  bw-required" brewer:classforerror="quantidadeEstoque">
 					<label for="estoque" class="control-label">Estoque</label>
 					<input id="estoque" type="text" class="form-control  js-plain" th:field="*{quantidadeEstoque}"/>
 				</div>
 			</div>
 			
 			<div class="row">
-				<div class="form-group col-sm-12">
+				<div class="form-group  col-sm-12">
 					<input type="hidden" th:field="*{foto}">
 					<input type="hidden" th:field="*{contentType}">
 				
 					<label class="control-label">Foto</label>
 					
 					<div class="js-container-foto-cerveja" th:attr="data-url-fotos=@{/fotos}">
-						<div id="upload-drop" class="bb-upload">
-							<i class="glyphicon glyphicon-cloud-upload"></i>
-							<span>Arraste a foto aqui ou</span>
-							<a class="bb-upload-form-file">Selecione<input id="upload-select" type="file" accept=".jpg,.jpeg,.png"/></a>
+						<div id="upload-drop" class="bw-upload">
+							<i class="glyphicon  glyphicon-cloud-upload"></i>
+							<span>Arraste a foto aqui ou </span>
+							<a class="bw-upload-form-file">selecione <input id="upload-select" type="file" accept=".jpg,.jpeg,.png"/></a>
 						</div>
 					</div>
-				</div>							
+				</div>
 			</div>
 			
 			<div class="form-group">
@@ -150,17 +148,16 @@
 	</div>
 	
 	<div th:replace="estilo/CadastroRapidoEstilo :: modal"></div>
-	
 	<th:block th:replace="hbs/FotoCerveja"></th:block>
 </section>
-	
-<!-- Bloco acrescentado na Aula 11.2 - Salvando estilo rapido com ajax / -->	
-<th:block layout:fragment="javascript-extra"><!-- javascript extra que quero carregar desta página -->
+
+<th:block layout:fragment="javascript-extra">
 	<script th:src="@{/javascripts/estilo.cadastro-rapido.js}"></script>
 	<script th:src="@{/javascripts/vendors/uikit.min.js}"></script>
 	<script th:src="@{/javascripts/vendors/upload.min.js}"></script>
 	<script th:src="@{/javascripts/vendors/handlebars.min.js}"></script>
 	<script th:src="@{/javascripts/cerveja.upload-foto.js}"></script>
+	
 </th:block>
 	
 </body>

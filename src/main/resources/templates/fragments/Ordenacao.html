@@ -1,20 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
 	xmlns:th="http://www.thymeleaf.org">
-
-<!-- Esse fragmento será utilizado na pagina de PesquisaCervejas para os campos sku e nome para a ordenação.
-		Para essa página estamos recebendo 3 parametros (pagina, o texto SKU e a propriedade 'sku' -->
-
-<th:block th:fragment="order (pagina, propriedade, texto)"><!-- Será exibido na página PesquisaCerveja somente a partir daqui até o fim deste bloco -->
 	
-	<a th:href="${pagina.urlOrdenada(propriedade)}" th:remove="${pagina.vazia} ? tag"> 
-		<span th:text="${texto}">	</span>							
-		<!-- o "dropup" mostra a setinha pra cima. O th:remove remove essa tag toda e a setinha da página vai ficar pra baixo com o "caret" -->
-		<span class="dropup" th:remove="${pagina.descendente(propriedade)} ? tag" 
+<th:block th:fragment="order (pagina, propriedade, texto)">
+	<a th:href="${pagina.urlOrdenada(propriedade)}" th:remove="${pagina.vazia} ? tag">
+		<span th:text="${texto}"></span>
+		<span class="dropup" th:remove="${pagina.descendente(propriedade)} ? tag"
 				th:if="${pagina.ordenada(propriedade)}">
 			<span class="caret"></span>
 		</span>
 	</a>
-	
 </th:block>
-</html>	
+	
+</html>

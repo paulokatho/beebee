@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layout/LayoutPadrao}">
-	
+	xmlns:layout="~{http://www.ultraq.net.nz/thymeleaf/layout}"
+	layout:decorate="layout/LayoutPadrao">
+
 <head>
 	<title>Cadastro de cidade</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/bootstrap-switch.min.css}"/>
 </head>
 
 <section layout:fragment="conteudo">
@@ -18,33 +17,26 @@
 			</h1>
 		</div>
 	</div>
-
-	<div class="container-fluid">
 	
-		<!-- <div class="alert  alert-danger  alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<i class="fa  fa-exclamation-circle"></i> Já existe um produto com o nome informado.
-		</div> -->
-
-		<form method="POST" th:object="${cidade}" class="form-vertical  js-form-loading">
+	<div class="container-fluid">
+		<form>
 			<div class="row">
-				<div class="col-sm-4  form-group  bb-required">
-					<label for="estado">Estado</label>
+				<div class="form-group  col-sm-4" >
+					<label for="estado" >Estado</label>
 					<select id="estado" class="form-control">
-						<option value="">Selecione o estado</option>
-						<option value="1">São Paulo</option>
-					</select>
+	                    <option value="">Selecione o estado</option>
+	                </select>
 				</div>
-				<div class="col-sm-8  form-group  bb-required">
+				
+				<div class="form-group  col-sm-8">
 					<label for="nome">Nome</label>
-					<input id="nome" type="text" class="form-control" autofocus="autofocus"/>
+					<input type="text" class="form-control" id="nome" autofocus="autofocus"/>
 				</div>
 			</div>
 			
-			<div class="form-group">
-				<button class="btn  btn-primary" type="submit">Salvar</button>
-			</div>
+			<button type="submit" class="btn  btn-primary">Salvar</button>
 		</form>
 	</div>
 </section>
+
 </html>

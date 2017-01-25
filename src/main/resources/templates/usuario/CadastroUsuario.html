@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
-	xmlns:th="http://www.thymeleaf.org"
+<html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org"
 	layout:decorate="~{layout/LayoutPadrao}">
-	
+
 <head>
 	<title>Cadastro de usuário</title>
+	
 	<link rel="stylesheet" type="text/css" th:href="@{/stylesheets/vendors/bootstrap-switch.min.css}"/>
 </head>
 
@@ -18,70 +19,65 @@
 			</h1>
 		</div>
 	</div>
-
-	<div class="container-fluid">
 	
-		<!-- <div class="alert  alert-danger  alert-dismissible" role="alert">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-			<i class="fa  fa-exclamation-circle"></i> Já existe um produto com o nome informado.
-		</div> -->
-
-		<form method="POST" th:object="${usuario}" class="form-vertical  js-form-loading">
+	<div class="container-fluid">
+		<form>
 			<div class="row">
-				<div class="col-sm-12  form-group  bb-required">
+				<div class="form-group  col-sm-12">
 					<label for="nome">Nome</label>
-					<input id="nome" type="text" class="form-control" autofocus="autofocus"/>
+					<input type="text" class="form-control" id="nome" autofocus="autofocus"/>
 				</div>
 			</div>
-			
+				
 			<div class="row">
-				<div class="col-sm-6  form-group  bb-required">
+				<div class="form-group  col-sm-6">
 					<label for="email">E-mail</label>
-					<input id="email" type="text" class="form-control"/>
+					<input type="text" class="form-control" id="email"/>
 				</div>
-				<div class="col-sm-3  form-group  bb-required">
+				<div class="form-group  col-sm-3">
 					<label for="dataNascimento">Data de nascimento</label>
-					<input id="dataNascimento" type="text" class="form-control"/>
-				</div>	
+					<input type="text" class="form-control" id="dataNascimento"/>
+				</div>
 			</div>
 			
 			<div class="row">
-				<div class="col-sm-3  form-group  bb-required">
-					<label for="senha">Senha</label>
-					<input id="senha" type="password" class="form-control"/>
+				<div class="form-group  col-sm-3">
+					<label for="senha">Senha</label> 
+					<input type="password" class="form-control" id="senha"/>
 				</div>
-				<div class="col-sm-3  form-group  bb-required">
-					<label for="confirmacaoSenha">Confirmação de senha</label>
-					<input id="confirmacaoSenha" type="password" class="form-control"/>
+				
+				<div class="form-group  col-sm-3">
+					<label for="confirmacaoSenha">Confirmação de senha</label> 
+					<input type="password" class="form-control" id="confirmacaoSenha"/>
 				</div>
-				<div class="col-sm-3  form-group  bb-required">
+				
+				<div class="form-group  col-sm-3">
 					<label class="control-label">Status</label>
-						<div>							
-					    	<input type="checkbox" class="js-status" data-size="small" data-off-color="danger"
-					    		data-on-color="success" data-on-text="Ativo" data-off-text="Inativo" />						    
-					    </div>
-			    </div>
+					<div>
+						<input type="checkbox" class="js-status" data-size="small" data-off-color="danger" 
+							data-on-text="Ativo" data-off-text="Inativo"/>
+					</div>
+				</div>
+				
 			</div>
 			
 			<div class="row">
-				<div class="col-sm-6  form-group  bb-required">
-					<label class="control-label">Grupos</label>		
-					<div>		
-						<div class="checkbox  checkbox-inline">
-							<input type="checkbox" />
-							<label>Administrador</label>
-						
-						</div>	
-						<div class="checkbox  checkbox-inline">	
-							<input type="checkbox" />
-							<label>Vendedor</label>
-						</div>
+				<div class="form-group  col-sm-6">
+					<label class="control-label">Grupos</label> 
+					<div>
+  						<div class="checkbox  checkbox-inline"> 
+	    					<input type="checkbox" />
+	    					<label>Administrador</label>
+    					</div>
+    					<div class="checkbox  checkbox-inline"> 
+	    					<input type="checkbox" />
+	    					<label>Vendedor</label>
+    					</div>
 					</div>
 				</div>
 			</div>
-			<div class="form-group">
-				<button class="btn  btn-primary" type="submit">Salvar</button>
-			</div>
+			
+			<button type="submit" class="btn  btn-primary">Salvar</button>
 		</form>
 	</div>
 </section>

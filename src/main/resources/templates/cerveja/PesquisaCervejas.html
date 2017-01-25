@@ -2,36 +2,35 @@
 <html lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="layout/LayoutPadrao"
-	xmlns:beebee="http://beebee.katho.com">
+	layout:decorate="~{layout/LayoutPadrao}"
+	xmlns:brewer="http://brewer.algaworks.com">
 	
 <head>
-	<title>Pesquisa de cerveja</title>	
+	<title>Pesquisa de cervejas</title>
 </head>
 
 <body>
-<section layout:fragment="conteudo">	
+<section layout:fragment="conteudo">
 	<div class="page-header">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col-sm-10">								
-					<h1>Pesquisa de cerveja</h1>
+				<div class="col-sm-10">
+					<h1>Pesquisa de cervejas</h1>
 				</div>
-			<!-- Botão para voltar para a página de cadastro de cerveja -->
+				
 				<div class="col-sm-2">
 					<div class="aw-page-header-controls">
 						<a class="btn  btn-default" th:href="@{/cervejas/novo}">
 							<i class="glyphicon  glyphicon-plus-sign"></i> <span class="hidden-xs  hidden-sm">Nova cerveja</span>
 						</a>
-					</div>				
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>	
+	</div>
 	
 	<div class="container-fluid">
 		<form method="GET" th:object="${cervejaFilter}">
-			
 			<div class="row">
 				<div class="form-group  col-sm-6">
 					<label class="control-label" for="sku">SKU</label>
@@ -73,7 +72,7 @@
 	    					</div>
 	  					</th:block>
 	  					<div class="radio  radio-inline">
-		    				<input id="todasOrigens" type="radio" th:checked="*{origem} == null" name="origem"/><!-- th:checked é setado caso nenhuma opção seja escolhida -->
+		    				<input id="todasOrigens" type="radio" th:checked="*{origem} == null" name="origem"/>
 		    				<label for="todasOrigens" >Todas</label>
 	    				</div>
 					</div>
@@ -92,16 +91,16 @@
 			<button type="submit" class="btn  btn-primary">Pesquisar</button>
 		</form>
 		
-		<div class="table-responsive  bb-tabela-simples">
+		<div class="table-responsive  bw-tabela-simples">
 			<table class="table  table-hover">
 				<thead>
 					<tr>
 						<th class="table-cervejas-col-foto"></th>
-						<th class="table-cervejas-col-sku">															
-							<beebee:order page="${pagina}" field="sku" text="SKU"/>
+						<th class="table-cervejas-col-sku">
+							<brewer:order page="${pagina}" field="sku" text="SKU"/>
 						</th>
 						<th class="table-cervejas-col-nome">
-							<beebee:order page="${pagina}" field="nome" text="Nome"/>	
+							<brewer:order page="${pagina}" field="nome" text="Nome"/>
 						</th>
 						<th class="table-cervejas-col-estilo">Estilo</th>
 						<th class="table-cervejas-col-origem">Origem</th>
@@ -119,7 +118,7 @@
 						<td th:text="${cerveja.nome}">Cerveja Stella</td>
 						<td th:text="${cerveja.estilo.nome}">Lager</td>
 						<td th:text="${cerveja.origem.descricao}">Internacional</td>
-						<td class="text-right" th:text="|R$ ${cerveja.valor}|"></td>
+						<td class="text-right" th:text="|R$ ${cerveja.valor}|">R$ 8.00</td>
 						<td class="text-center">
 							<a class="btn  btn-link  btn-xs" title="Editar"> 
 								<i class="glyphicon glyphicon-pencil"></i>
@@ -129,19 +128,17 @@
 							</a>
 						</td>
 					</tr>
-					<tr th:if="${pagina.vazia}"><!-- Esse valor vem de PageWrapper método isVazia() -->
+					<tr th:if="${pagina.vazia}">
 						<td colspan="7">Nenhuma cerveja encontrada</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
 		
-		<!-- Paginação com Bootstrap		 
-		<th:block th:replace="fragments/Paginacao :: paginacao"></th:block> -->
+		<brewer:pagination page="${pagina}"/>
 		
-		<beebee:pagination page="${pagina}"/>
-		
-	</div> <!-- fechando o <div class="container-fluid"> -->
+	</div>
+
 </section>
 </body>
 </html>
